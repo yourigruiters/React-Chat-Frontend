@@ -1,0 +1,151 @@
+@import "../../../../../styles/variables";
+
+.chat-main {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  &__messages {
+    width: 100%;
+    height: 100%;
+    background-color: #f1f2f7;
+    transition: width 0.5s;
+
+    &--smaller {
+      width: calc(100% - 300px);
+    }
+  }
+
+  &__people {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    right: -300px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    transition: right 0.5s;
+    box-shadow: -2px 0px 20px -14px rgba(56, 162, 225, 0.7);
+
+    &--open {
+      right: 0;
+
+      .chat-main__people__header__button svg {
+        transform: rotate(0deg);
+      }
+    }
+
+    &__header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+      background-color: #f3f3f3;
+      margin-bottom: 20px;
+
+      &__button {
+        button {
+          position: absolute;
+          left: -20px;
+          top: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          padding: 0px;
+          border-radius: 50px;
+          background: $blue-light;
+          color: $white;
+          border: 0;
+          outline: 0;
+          cursor: pointer;
+
+          &:hover {
+            background-color: darken($blue-light, 10%);
+          }
+
+          svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+            transition: transform 0.5s;
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      &__title {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        font-family: $font-source;
+
+        span {
+          font-weight: bold;
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: $blue-light;
+          margin-left: 5px;
+        }
+      }
+    }
+
+    &__main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      &__person {
+        margin-bottom: 15px;
+
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 70px;
+      margin-top: auto;
+      padding: 10px;
+      background-color: #f3f3f3;
+
+      button {
+        width: 80%;
+        padding: 8px 40px 6px;
+        background-color: red;
+        color: $white;
+        outline: none;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        line-height: 32px;
+        cursor: pointer;
+
+        @media (min-width: $breakpoint-sm) {
+          font-size: 16px;
+        }
+
+        &:hover {
+          background-color: darken(red, 10%);
+        }
+      }
+    }
+  }
+}
