@@ -8,16 +8,26 @@ import Logo from "../../../assets/images/ubiquiti-logo-white.png";
 import "./homepage.view.scss";
 
 interface homepageProps {
+  username: string;
   setUsername: (newUsername: { username: string }) => void;
   history: any;
   location: any;
 }
 
-const HomepageView = ({ setUsername, history, location }: homepageProps) => {
+const HomepageView = ({
+  username,
+  setUsername,
+  history,
+  location
+}: homepageProps) => {
   const [userInput, setUserInput] = React.useState("Visitor");
   const [warning, setWarning] = React.useState("");
 
   React.useEffect(() => {
+    if (username) {
+      setUserInput(username);
+    }
+
     const search = new URLSearchParams(location.search);
     const searchWarning = search.get("warning");
 
@@ -27,6 +37,10 @@ const HomepageView = ({ setUsername, history, location }: homepageProps) => {
           setWarning(
             "Please provide a username before accessing the chatroom."
           );
+          break;
+        // Fix: implement below
+        case "no-activity":
+          setWarning("Disconnected by the server due to inactivity.");
           break;
         default:
           setWarning("");

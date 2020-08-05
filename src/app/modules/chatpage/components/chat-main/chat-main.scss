@@ -13,7 +13,11 @@
     transition: width 0.5s;
 
     &--smaller {
-      width: calc(100% - 300px);
+      width: 100%;
+
+      @media (min-width: $breakpoint-md) {
+        width: calc(100% - 300px);
+      }
     }
   }
 
@@ -35,6 +39,7 @@
 
       .chat-main__people__header__button svg {
         transform: rotate(0deg);
+        left: 2px;
       }
     }
 
@@ -50,12 +55,12 @@
       &__button {
         button {
           position: absolute;
-          left: -20px;
-          top: 5px;
+          left: -30px;
+          top: 0px;
           display: flex;
           justify-content: center;
           align-items: center;
-          width: 40px;
+          width: 60px;
           height: 40px;
           padding: 0px;
           border-radius: 50px;
@@ -70,10 +75,12 @@
           }
 
           svg {
+            position: relative;
+            left: -15px;
             width: 20px;
             height: 20px;
             fill: white;
-            transition: transform 0.5s;
+            transition: transform 0.5s, left 0.5s;
             transform: rotate(180deg);
           }
         }
@@ -129,7 +136,7 @@
       button {
         width: 80%;
         padding: 8px 40px 6px;
-        background-color: red;
+        background-color: #e13838;
         color: $white;
         outline: none;
         border: none;
@@ -143,7 +150,7 @@
         }
 
         &:hover {
-          background-color: darken(red, 10%);
+          background-color: darken(#e13838, 10%);
         }
       }
     }

@@ -3,17 +3,20 @@ import cn from "classnames";
 
 import "./chat-main.scss";
 import { ToggleSidebar, OnlineUsers } from "../../../../../assets/icons/icons";
+import Chat from "../chat/chat";
 
 interface chatFooterProps {
-  messages: {};
+  messages: object[];
   onlinePeople: object[];
   handleDisconnect: () => void;
+  username: string;
 }
 
 const ChatMain = ({
   messages,
   onlinePeople,
-  handleDisconnect
+  handleDisconnect,
+  username
 }: chatFooterProps) => {
   const [openSidebar, setOpenSidebar] = React.useState(true);
 
@@ -23,7 +26,9 @@ const ChatMain = ({
         className={cn("chat-main__messages", {
           "chat-main__messages--smaller": openSidebar
         })}
-      ></section>
+      >
+        <Chat messages={messages} username={username} />
+      </section>
       <section
         className={cn("chat-main__people", {
           "chat-main__people--open": openSidebar
@@ -60,7 +65,7 @@ const ChatMain = ({
           )}
         </section>
         <section className="chat-main__people__footer">
-          <button>Disconnect</button>
+          <button onClick={handleDisconnect}>Disconnect</button>
         </section>
       </section>
     </section>

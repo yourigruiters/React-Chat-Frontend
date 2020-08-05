@@ -111,13 +111,11 @@
       font-family: $font-source;
       font-size: 14px;
       color: gray;
+      border: 1px solid #ffffff;
+      background: rgba(0, 0, 0, 0.05);
 
       @media (min-width: $breakpoint-sm) {
         font-size: 16px;
-      }
-
-      @media (min-width: $breakpoint-md) {
-        font-size: 18px;
       }
     }
 

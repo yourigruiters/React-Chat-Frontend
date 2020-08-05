@@ -11,7 +11,58 @@ interface chatpageProps {
 }
 
 const ChatpageView = ({ username, history }: chatpageProps) => {
-  const [messages, setMessages] = React.useState([]);
+  const [messages, setMessages] = React.useState<object[]>([
+    {
+      username: "iSnaek",
+      color: "#128417",
+      type: 0,
+      message: "",
+      timestamp: "12:43"
+    },
+    {
+      username: "UsedToLoveYa",
+      color: "#814892",
+      type: 0,
+      message: "",
+      timestamp: "12:43"
+    },
+    {
+      username: "iSnaek",
+      color: "#128417",
+      type: 4,
+      message: "What about sending me a long message?",
+      timestamp: "12:43"
+    },
+    {
+      username: "UsedToLoveYa",
+      color: "#814892",
+      type: 4,
+      message:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos iusto cum quis ex odio commodi, accusantium voluptates perferendis voluptate sapiente doloribus sed mollitia exercitationem totam molestiae quidem quibusdam odit quod ipsa ad aliquid adipisci? Dignissimos modi tempora laborum, sapiente magnam aliquid quisquam quod adipisci voluptatem distinctio esse quae minus ipsum numquam natus aperiam iure error!",
+      timestamp: "12:43"
+    },
+    {
+      username: "iSnaek",
+      color: "#128417",
+      type: 2,
+      message: "",
+      timestamp: "12:43"
+    },
+    {
+      username: "iSnaek",
+      color: "#128417",
+      type: 3,
+      message: "",
+      timestamp: "12:43"
+    },
+    {
+      username: "UsedToLoveYa",
+      color: "#814892",
+      type: 1,
+      message: "",
+      timestamp: "12:43"
+    }
+  ]);
   const [onlinePeople, setOnlinePeople] = React.useState<object[]>([
     {
       username: "iSnaek",
@@ -19,7 +70,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
     },
     {
       username: "UsedToLoveYa",
-      color: "#128417"
+      color: "#814892"
     }
   ]);
   const [typingPeople, setTypingPeople] = React.useState([
@@ -79,7 +130,9 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
 
   const handleDisconnect = () => {
     console.log("handleDisconnect");
-    // CLOSE CONNECTION AND SEND USER TO HOMEPAGE
+    // Fix: CLOSE CONNECTION AND SEND USER TO HOMEPAGE
+
+    history.push("/");
   };
 
   // React.useEffect(() => {
@@ -97,6 +150,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
           messages={messages}
           onlinePeople={onlinePeople}
           handleDisconnect={handleDisconnect}
+          username={username}
         />
       </section>
       <section className="chatpage__footer">
