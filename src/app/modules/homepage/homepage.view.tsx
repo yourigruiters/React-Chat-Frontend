@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 
 import Form from "./components/form/form";
 
@@ -46,7 +47,7 @@ const HomepageView = ({ setUsername, history, location }: homepageProps) => {
     }
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     if (!userInput || !userInput.replace(/\s/g, "").length) {
@@ -54,13 +55,30 @@ const HomepageView = ({ setUsername, history, location }: homepageProps) => {
       return;
     }
 
-    const newUsername = {
-      username: userInput
-    };
+    await axios
+      .get(`http://localhost:5000/api/user/${userInput}`)
+      .then((res) => {
+        if (res.status === 200) {
+          const newUsername = {
+            username: userInput
+          };
 
-    setUsername(newUsername);
+          setUsername(newUsername);
 
-    history.push("/chatroom");
+          history.push("/chatroom");
+        } else if (res.status === 202) {
+          setWarning(
+            "This username is already taken, please change and try again."
+          );
+        } else {
+          setWarning(
+            "The server has experienced an unexpected event, please try again."
+          );
+        }
+      })
+      .catch(() => {
+        setWarning("The server is unavailable.");
+      });
   };
 
   return (

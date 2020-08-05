@@ -7,13 +7,13 @@ import { ToggleSidebar, OnlineUsers } from "../../../../../assets/icons/icons";
 interface chatFooterProps {
   messages: {};
   onlinePeople: object[];
-  handleLogout: () => void;
+  handleDisconnect: () => void;
 }
 
 const ChatMain = ({
   messages,
   onlinePeople,
-  handleLogout
+  handleDisconnect
 }: chatFooterProps) => {
   const [openSidebar, setOpenSidebar] = React.useState(true);
 
@@ -60,7 +60,7 @@ const ChatMain = ({
           )}
         </section>
         <section className="chat-main__people__footer">
-          <button>Logout</button>
+          <button>Disconnect</button>
         </section>
       </section>
     </section>

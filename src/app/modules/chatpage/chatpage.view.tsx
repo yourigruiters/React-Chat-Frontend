@@ -77,8 +77,8 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
     setMessageInput("");
   };
 
-  const handleLogout = () => {
-    console.log("LOGOUT");
+  const handleDisconnect = () => {
+    console.log("handleDisconnect");
     // CLOSE CONNECTION AND SEND USER TO HOMEPAGE
   };
 
@@ -96,7 +96,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
         <ChatMain
           messages={messages}
           onlinePeople={onlinePeople}
-          handleLogout={handleLogout}
+          handleDisconnect={handleDisconnect}
         />
       </section>
       <section className="chatpage__footer">
