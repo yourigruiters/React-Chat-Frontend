@@ -1,19 +1,22 @@
 import * as React from "react";
 import { Route, Switch } from "react-router-dom";
+
+import HomepageView from "./modules/homepage";
+import ChatpageView from "./modules/chatpage";
+import FallbackView from "./modules/fallback/fallback.view";
+
+import Header from "./components/header/header";
+
 import "./app.scss";
-import HomePage from "./modules/home";
 
-interface AppProps {
-  id?: string;
-}
-
-const App = ({ id }: AppProps) => {
-  console.log(id);
-
+const App = () => {
   return (
     <>
+      <Header />
       <Switch>
-        <Route path="/" component={HomePage} />
+        <Route path="/" exact component={HomepageView} />
+        <Route path="/chatroom" exact component={ChatpageView} />
+        <Route path="/" component={FallbackView} />
       </Switch>
     </>
   );

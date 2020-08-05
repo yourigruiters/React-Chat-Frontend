@@ -1,0 +1,9 @@
+@import "../../../styles/variables";
+
+.fallback {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+}

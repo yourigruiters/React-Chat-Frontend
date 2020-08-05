@@ -1,0 +1,65 @@
+@import "../../../styles/variables";
+
+.homepage {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+
+  &__login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+
+    &__form {
+      width: 80%;
+      min-width: 250px;
+    }
+
+    @media (min-width: $breakpoint-sm) {
+      width: 70%;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      width: 60%;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      width: 50%;
+    }
+  }
+
+  &__banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+    background-color: $blue-light;
+
+    @media (min-width: $breakpoint-sm) {
+      width: 30%;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      width: 40%;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      width: 50%;
+    }
+
+    &__logo {
+      width: 50%;
+      height: auto;
+
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

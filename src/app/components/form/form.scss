@@ -1,0 +1,147 @@
+@import "../../../styles/variables";
+
+.form {
+  width: 80%;
+  min-width: 250px;
+
+  h3 {
+    font-family: $font-source;
+    font-size: 24px;
+    margin-bottom: 10px;
+    transition: font-size 0.5s;
+
+    @media (min-width: $breakpoint-sm) {
+      font-size: 28px;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 32px;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 36px;
+    }
+
+    @media (min-width: $breakpoint-xl) {
+      font-size: 2.7vw;
+    }
+
+    span {
+      color: $blue-light;
+    }
+  }
+
+  p {
+    font-family: $font-roboto;
+    font-weight: lighter;
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: font-size 0.5s;
+
+    @media (min-width: $breakpoint-sm) {
+      font-size: 16px;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 18px;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 20px;
+    }
+
+    @media (min-width: $breakpoint-xl) {
+      font-size: 1.3vw;
+    }
+  }
+
+  &__warning {
+    width: max-content;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 12px;
+    font-family: $font-roboto;
+    font-size: 12px;
+
+    @media (min-width: $breakpoint-sm) {
+      font-size: 14px;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 16px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-family: $font-roboto;
+      font-weight: lighter;
+      font-size: 12px;
+      margin-bottom: 5px;
+
+      @media (min-width: $breakpoint-sm) {
+        font-size: 14px;
+      }
+
+      @media (min-width: $breakpoint-md) {
+        font-size: 16px;
+      }
+    }
+
+    input {
+      width: 200px;
+      margin-right: auto;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      max-width: 250px;
+      margin-bottom: 15px;
+      padding: 8px 8px 6px;
+      outline: none;
+      border: 1px solid gray;
+      border-radius: 6px;
+      font-family: $font-source;
+      font-size: 14px;
+      color: gray;
+
+      @media (min-width: $breakpoint-sm) {
+        font-size: 16px;
+      }
+
+      @media (min-width: $breakpoint-md) {
+        font-size: 18px;
+      }
+    }
+
+    input[type="submit"] {
+      padding: 8px 20px 6px;
+      background-color: $blue-light;
+      color: $white;
+      outline: none;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+
+      @media (min-width: $breakpoint-sm) {
+        font-size: 18px;
+      }
+
+      @media (min-width: $breakpoint-md) {
+        font-size: 20px;
+      }
+
+      &:hover {
+        background-color: darken($blue-light, 10%);
+      }
+    }
+  }
+}
