@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Form from "../../components/form/form";
+import Form from "./components/form/form";
 
 import Logo from "../../../assets/images/ubiquiti-logo-white.png";
 
@@ -9,11 +9,30 @@ import "./homepage.view.scss";
 interface homepageProps {
   setUsername: (newUsername: { username: string }) => void;
   history: any;
+  location: any;
 }
 
-const HomepageView = ({ setUsername, history }: homepageProps) => {
+const HomepageView = ({ setUsername, history, location }: homepageProps) => {
   const [userInput, setUserInput] = React.useState("Visitor");
   const [warning, setWarning] = React.useState("");
+
+  React.useEffect(() => {
+    const search = new URLSearchParams(location.search);
+    const searchWarning = search.get("warning");
+
+    if (searchWarning) {
+      switch (searchWarning) {
+        case "no-user":
+          setWarning(
+            "Please provide a username before accessing the chatroom."
+          );
+          break;
+        default:
+          setWarning("");
+          break;
+      }
+    }
+  }, []);
 
   const handleChange = (event: any) => {
     setUserInput(event.target.value);
