@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 
 import HomepageView from "./modules/homepage";
 import ChatpageView from "./modules/chatpage";
@@ -22,4 +22,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withRouter(App);

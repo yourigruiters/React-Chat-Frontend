@@ -3,19 +3,22 @@ import * as React from "react";
 import "./form.scss";
 
 interface formProps {
-  username: string;
+  userInput: string;
   warning: string;
   handleChange: (e: any) => void;
   handleSubmit: (e: any) => void;
 }
 
-const Form = ({ username, warning, handleChange, handleSubmit }: formProps) => {
-  console.log(username, warning, handleChange, handleSubmit);
-
+const Form = ({
+  userInput,
+  warning,
+  handleChange,
+  handleSubmit
+}: formProps) => {
   return (
     <section className="form">
       <h3>
-        Welcome, <span>{username}</span>!
+        Welcome, <span>{userInput}</span>!
       </h3>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem
@@ -27,7 +30,7 @@ const Form = ({ username, warning, handleChange, handleSubmit }: formProps) => {
         <label>Username..</label>
         <input
           type="text"
-          value={username}
+          value={userInput}
           maxLength={20}
           onChange={(e: any) => handleChange(e)}
           placeholder="Enter your username.."

@@ -6,12 +6,17 @@ import Logo from "../../../assets/images/ubiquiti-logo-white.png";
 
 import "./homepage.view.scss";
 
-const HomepageView = () => {
-  const [username, setUsername] = React.useState("Stranger");
+interface homepageProps {
+  setUsername: (newUsername: { username: string }) => void;
+  history: any;
+}
+
+const HomepageView = ({ setUsername, history }: homepageProps) => {
+  const [userInput, setUserInput] = React.useState("Visitor");
   const [warning, setWarning] = React.useState("");
 
   const handleChange = (event: any) => {
-    setUsername(event.target.value);
+    setUserInput(event.target.value);
 
     if (
       warning &&
@@ -25,13 +30,18 @@ const HomepageView = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    if (!username || !username.replace(/\s/g, "").length) {
+    if (!userInput || !userInput.replace(/\s/g, "").length) {
       setWarning("Please enter a valid username.");
       return;
     }
 
-    console.log(username);
-    // Call Redux function
+    const newUsername = {
+      username: userInput
+    };
+
+    setUsername(newUsername);
+
+    history.push("/chatroom");
   };
 
   return (
@@ -39,7 +49,7 @@ const HomepageView = () => {
       <section className="homepage__login">
         <section className="homepage__login__form">
           <Form
-            username={username}
+            userInput={userInput}
             warning={warning}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
