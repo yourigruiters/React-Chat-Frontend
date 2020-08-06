@@ -21,7 +21,7 @@
         background: rgba(0, 0, 0, 0.05);
 
         &--warning {
-          border: 1px solid red;
+          border: 1px solid $red;
         }
 
         textarea {
@@ -76,7 +76,7 @@
             width: 25px;
             height: 25px;
             margin-right: 1px;
-            fill: white;
+            fill: $white;
           }
         }
       }

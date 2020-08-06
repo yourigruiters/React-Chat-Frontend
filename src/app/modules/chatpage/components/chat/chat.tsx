@@ -16,7 +16,6 @@ const Chat = ({ messages, username }: chatProps) => {
   };
 
   React.useEffect(() => {
-    console.log("oleee");
     scrollToBottom();
   }, [messages]);
 
@@ -34,11 +33,6 @@ const Chat = ({ messages, username }: chatProps) => {
             },
             index: number
           ) => {
-            console.log(
-              message.username.toLowerCase(),
-              "MATCHING",
-              username.toLowerCase()
-            );
             return (
               <section
                 key={index}

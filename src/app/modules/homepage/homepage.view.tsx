@@ -24,6 +24,7 @@ const HomepageView = ({
   const [warning, setWarning] = React.useState("");
 
   React.useEffect(() => {
+    // Set correct starting username
     if (username) {
       setUserInput(username);
     } else {
@@ -31,6 +32,7 @@ const HomepageView = ({
       setUserInput(`Visitor${random}`);
     }
 
+    // Check for warning and display if found
     const search = new URLSearchParams(location.search);
     const searchWarning = search.get("warning");
 
@@ -42,7 +44,9 @@ const HomepageView = ({
           );
           break;
         case "no-activity":
-          setWarning("Disconnected by the server due to inactivity.");
+          setWarning(
+            "Disconnected by the server due to inactivity or unwanted behaviour."
+          );
           break;
         default:
           setWarning("");
@@ -71,9 +75,10 @@ const HomepageView = ({
       return;
     }
 
+    // Check if username is available - Provide warning if not
     await axios
-      // .get(`http://localhost:5000/api/user/${userInput}`)
-      .get(`https://ubiquiti-server.herokuapp.com/api/user/${userInput}`)
+      .get(`http://localhost:5000/api/user/${userInput}`)
+      // .get(`https://ubiquiti-server.herokuapp.com/api/user/${userInput}`)
       .then((res) => {
         if (res.status === 200) {
           const newUsername = {

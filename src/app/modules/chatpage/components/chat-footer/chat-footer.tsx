@@ -1,8 +1,9 @@
 import * as React from "react";
 import cn from "classnames";
 
-import "./chat-footer.scss";
 import { SendMessage } from "../../../../../assets/icons/icons";
+
+import "./chat-footer.scss";
 
 interface chatFooterProps {
   messageInput: string;

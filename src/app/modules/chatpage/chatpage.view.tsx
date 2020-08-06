@@ -21,18 +21,20 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
   const [isTyping, setIsTyping] = React.useState(false);
 
   React.useEffect(() => {
+    // Send user to homepage if no username is present
     if (!username) {
       history.push("/?warning=no-user");
       return;
     }
 
-    // const socket = io("http://localhost:5000");
-    const socket = io("https://ubiquiti-server.herokuapp.com/");
+    // Create socket for socket.io connection
+    const socket = io("http://localhost:5000");
+    // const socket = io("https://ubiquiti-server.herokuapp.com/");
     setSocket(socket);
-    // Join chatroom
+
+    // Join chatroom to fetch roomData
     socket.emit("join_chatroom", username);
 
-    // Receive new roomdata
     socket.on(
       "new_roomdata",
       (roomData: { onlineUsers: object[]; typingUsers: string[] }) => {
@@ -45,7 +47,6 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
       }
     );
 
-    // Receive new message
     socket.on(
       "new_message",
       (newMessage: {
@@ -55,6 +56,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
         message: string;
         timestamp: string;
       }) => {
+        // Create correct timestamp for messages
         const today = new Date();
         const hours =
           today.getHours().toString().length === 1
@@ -89,7 +91,6 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
     });
   }, []);
 
-  // FIX: improve enter handling
   React.useEffect(() => {
     const enterListener = (event: any) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
@@ -108,6 +109,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
     };
   }, [messageInput]);
 
+  // Send user typing information to server - Ensuring activityChecker in server
   const handleChange = (event: any) => {
     setMessageInput(event.target.value);
 
@@ -141,6 +143,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
     setMessageInput("");
   };
 
+  // Disconnect button
   const handleDisconnect = () => {
     socket.emit("leave_chatroom");
     socket.disconnect();
