@@ -7,7 +7,7 @@ import { SendMessage } from "../../../../../assets/icons/icons";
 interface chatFooterProps {
   messageInput: string;
   messageWarning: boolean;
-  typingPeople: string[];
+  typingUsers: string[];
   handleChange: (e: any) => void;
   handleSubmit: (e: any) => void;
 }
@@ -15,10 +15,11 @@ interface chatFooterProps {
 const ChatFooter = ({
   messageInput,
   messageWarning,
-  typingPeople,
+  typingUsers,
   handleChange,
   handleSubmit
 }: chatFooterProps) => {
+  console.log("CHAT FOOTER TYPING", typingUsers);
   return (
     <section className="chat-footer">
       <section className="chat-footer__form">
@@ -45,12 +46,12 @@ const ChatFooter = ({
       </section>
       <section className="chat-footer__details">
         <p>
-          {typingPeople && typingPeople.length > 2
+          {typingUsers && typingUsers.length > 2
             ? "Several people are typing..."
-            : typingPeople.map((typingPerson: string, index: number) => {
+            : typingUsers.map((typingUser: string, index: number) => {
                 let string = "";
-                string += typingPerson;
-                if (index === 0 && typingPeople.length === 1) {
+                string += typingUser;
+                if (index === 0 && typingUsers.length === 1) {
                   string += " is typing...";
                 } else if (index === 0) {
                   string += " and ";

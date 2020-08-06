@@ -7,14 +7,14 @@ import Chat from "../chat/chat";
 
 interface chatFooterProps {
   messages: object[];
-  onlinePeople: object[];
+  onlineUsers: object[];
   handleDisconnect: () => void;
   username: string;
 }
 
 const ChatMain = ({
   messages,
-  onlinePeople,
+  onlineUsers,
   handleDisconnect,
   username
 }: chatFooterProps) => {
@@ -45,21 +45,19 @@ const ChatMain = ({
           </article>
           <article className="chat-main__people__header__title">
             <p>
-              Online users - <span>{onlinePeople.length}</span>
+              Online users - <span>{onlineUsers.length}</span>
             </p>
             <OnlineUsers />
           </article>
         </section>
         <section className="chat-main__people__main">
-          {onlinePeople.map(
+          {onlineUsers.map(
             (
-              onlinePerson: { username: string; color: string },
+              onlineUser: { username: string; color: string },
               index: number
             ) => (
               <article key={index} className="chat-main__people__main__person">
-                <p style={{ color: onlinePerson.color }}>
-                  {onlinePerson.username}
-                </p>
+                <p style={{ color: onlineUser.color }}>{onlineUser.username}</p>
               </article>
             )
           )}

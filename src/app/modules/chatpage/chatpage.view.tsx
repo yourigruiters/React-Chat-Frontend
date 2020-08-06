@@ -11,91 +11,63 @@ interface chatpageProps {
   history: any;
 }
 
-const socket = io("http://localhost:5000");
-
 const ChatpageView = ({ username, history }: chatpageProps) => {
-  // Fix: clear default messages - isTyping and all.
-  const [messages, setMessages] = React.useState<object[]>([
-    {
-      username: "iSnaek",
-      color: "#128417",
-      type: 0,
-      message: "",
-      timestamp: "12:43"
-    },
-    {
-      username: "UsedToLoveYa",
-      color: "#814892",
-      type: 0,
-      message: "",
-      timestamp: "12:43"
-    },
-    {
-      username: "iSnaek",
-      color: "#128417",
-      type: 4,
-      message: "What about sending me a long message?",
-      timestamp: "12:43"
-    },
-    {
-      username: "UsedToLoveYa",
-      color: "#814892",
-      type: 4,
-      message:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos iusto cum quis ex odio commodi, accusantium voluptates perferendis voluptate sapiente doloribus sed mollitia exercitationem totam molestiae quidem quibusdam odit quod ipsa ad aliquid adipisci? Dignissimos modi tempora laborum, sapiente magnam aliquid quisquam quod adipisci voluptatem distinctio esse quae minus ipsum numquam natus aperiam iure error!",
-      timestamp: "12:43"
-    },
-    {
-      username: "iSnaek",
-      color: "#128417",
-      type: 2,
-      message: "",
-      timestamp: "12:43"
-    },
-    {
-      username: "iSnaek",
-      color: "#128417",
-      type: 3,
-      message: "",
-      timestamp: "12:43"
-    },
-    {
-      username: "UsedToLoveYa",
-      color: "#814892",
-      type: 1,
-      message: "",
-      timestamp: "12:43"
-    }
-  ]);
-  const [onlinePeople, setOnlinePeople] = React.useState<object[]>([
-    {
-      username: "iSnaek",
-      color: "#128417"
-    },
-    {
-      username: "UsedToLoveYa",
-      color: "#814892"
-    }
-  ]);
-  const [typingPeople, setTypingPeople] = React.useState([
-    "iSnaek",
-    "UsedToLoveYa"
-  ]);
+  const [socket, setSocket] = React.useState<any>({});
+  const [messages, setMessages] = React.useState<object[]>([]);
+  const [onlineUsers, setOnlineUsers] = React.useState<object[]>([]);
+  const [typingUsers, setTypingUsers] = React.useState([]);
   const [messageInput, setMessageInput] = React.useState("");
   const [messageWarning, setMessageWarning] = React.useState(false);
 
-  // Fix: Reactivate this when done implementing page
   React.useEffect(() => {
     if (!username) {
       history.push("/?warning=no-user");
       return;
     }
 
+    const socket = io("http://localhost:5000");
+    setSocket(socket);
     socket.emit("join_chatroom", username);
 
-    socket.on("join_chatroom", (roomData: {}) => {
-      console.log("hihihihi");
-    });
+    socket.on(
+      "new_roomdata",
+      (roomData: { onlineUsers: object[]; typingUsers: string[] }) => {
+        setOnlineUsers((prevState: object[]) => {
+          return roomData.onlineUsers;
+        });
+        setTypingUsers((prevState: string[]) => {
+          return roomData.typingUsers;
+        });
+      }
+    );
+
+    socket.on(
+      "new_message",
+      (newMessage: {
+        username: string;
+        color: string;
+        type: number;
+        message: string;
+        timestamp: string;
+      }) => {
+        const today = new Date();
+        const hours =
+          today.getHours().toString().length === 1
+            ? today.getHours() + "0"
+            : today.getHours();
+        const minutes =
+          today.getMinutes().toString().length === 1
+            ? today.getMinutes() + "0"
+            : today.getMinutes();
+        const time = `${hours}:${minutes}`;
+
+        newMessage.timestamp = time;
+
+        setMessages((prevState: object[]) => {
+          return [...prevState, newMessage];
+        });
+      }
+    );
   }, []);
 
   // FIX: improve enter handling
@@ -148,9 +120,8 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
   };
 
   const handleDisconnect = () => {
-    console.log("handleDisconnect");
-    // Fix: CLOSE CONNECTION AND SEND USER TO HOMEPAGE
-
+    socket.emit("leave_chatroom");
+    socket.disconnect();
     history.push("/");
   };
 
@@ -159,7 +130,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
       <section className="chatpage__main">
         <ChatMain
           messages={messages}
-          onlinePeople={onlinePeople}
+          onlineUsers={onlineUsers}
           handleDisconnect={handleDisconnect}
           username={username}
         />
@@ -168,7 +139,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
         <ChatFooter
           messageInput={messageInput}
           messageWarning={messageWarning}
-          typingPeople={typingPeople}
+          typingUsers={typingUsers}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
