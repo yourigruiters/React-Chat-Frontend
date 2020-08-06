@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as io from "socket.io-client";
 
 import ChatFooter from "./components/chat-footer/chat-footer";
 import ChatMain from "./components/chat-main/chat-main";
@@ -10,7 +11,10 @@ interface chatpageProps {
   history: any;
 }
 
+const socket = io("http://localhost:5000");
+
 const ChatpageView = ({ username, history }: chatpageProps) => {
+  // Fix: clear default messages - isTyping and all.
   const [messages, setMessages] = React.useState<object[]>([
     {
       username: "iSnaek",
@@ -80,6 +84,20 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
   const [messageInput, setMessageInput] = React.useState("");
   const [messageWarning, setMessageWarning] = React.useState(false);
 
+  // Fix: Reactivate this when done implementing page
+  React.useEffect(() => {
+    if (!username) {
+      history.push("/?warning=no-user");
+      return;
+    }
+
+    socket.emit("join_chatroom", username);
+
+    socket.on("join_chatroom", (roomData: {}) => {
+      console.log("hihihihi");
+    });
+  }, []);
+
   // FIX: improve enter handling
   React.useEffect(() => {
     const enterListener = (event: any) => {
@@ -119,6 +137,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
       return;
     }
 
+    // Fix: send messsages
     // const newMessage = {
     //   username,
     //   message: messageInput
@@ -134,14 +153,6 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
 
     history.push("/");
   };
-
-  // React.useEffect(() => {
-  //   if (!username) {
-  //     history.push("/?warning=no-user");
-  //   }
-  // }, []);
-
-  console.log(username, history);
 
   return (
     <section className="chatpage">

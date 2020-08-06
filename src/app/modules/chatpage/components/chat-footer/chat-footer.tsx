@@ -38,6 +38,7 @@ const ChatFooter = ({
             ></textarea>
             <button type="submit">
               <SendMessage />
+              <span>Send</span>
             </button>
           </article>
         </form>

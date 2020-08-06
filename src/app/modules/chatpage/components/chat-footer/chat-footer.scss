@@ -54,8 +54,22 @@
           outline: 0;
           cursor: pointer;
 
+          @media (min-width: $breakpoint-sm) {
+            min-width: 150px;
+          }
+
           &:hover {
             background-color: darken($blue-light, 10%);
+          }
+
+          span {
+            display: none;
+
+            @media (min-width: $breakpoint-sm) {
+              display: block;
+              margin-left: 5px;
+              font-size: 16px;
+            }
           }
 
           svg {

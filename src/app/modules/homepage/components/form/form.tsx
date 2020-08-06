@@ -21,9 +21,9 @@ const Form = ({
         Welcome, <span>{userInput}</span>!
       </h3>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem
-        perferendis voluptates, distinctio animi molestiae ducimus maiores
-        repellendus alias deleniti.
+        We're glad to see you at the entrance of our chat application. Please
+        feel free to change the predefined 'visitor' to a username of your
+        liking before entering the chatroom.
       </p>
       {warning && <article className="form__warning">{warning}</article>}
       <form className="form__form" onSubmit={(e: any) => handleSubmit(e)}>
