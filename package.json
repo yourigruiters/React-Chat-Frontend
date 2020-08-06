@@ -11,11 +11,8 @@
   },
   "scripts": {
     "start-dev": "webpack-dev-server --open",
-    "build-dev": "webpack --mode production",
+    "build": "webpack --mode production",
     "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
   },
   "keywords": [],
