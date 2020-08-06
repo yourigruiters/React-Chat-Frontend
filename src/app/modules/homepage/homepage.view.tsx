@@ -26,6 +26,8 @@ const HomepageView = ({
   React.useEffect(() => {
     if (username) {
       setUserInput(username);
+    } else {
+      // Fix: set userInput to visitorXXX with 3 random digits
     }
 
     const search = new URLSearchParams(location.search);

@@ -19,7 +19,6 @@ const ChatFooter = ({
   handleChange,
   handleSubmit
 }: chatFooterProps) => {
-  console.log("CHAT FOOTER TYPING", typingUsers);
   return (
     <section className="chat-footer">
       <section className="chat-footer__form">

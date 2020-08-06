@@ -23,13 +23,18 @@ const Chat = ({ messages, username }: chatProps) => {
             },
             index: number
           ) => {
+            console.log(
+              message.username.toLowerCase(),
+              "MATCHING",
+              username.toLowerCase()
+            );
             return (
               <section
                 key={index}
                 className={cn("chat__block", {
                   "chat__block--owner":
                     message.username.toLowerCase() === username.toLowerCase() &&
-                    message.type === 2
+                    message.type === 4
                 })}
               >
                 <article className="chat__block__timestamp">

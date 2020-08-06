@@ -18,6 +18,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
   const [typingUsers, setTypingUsers] = React.useState([]);
   const [messageInput, setMessageInput] = React.useState("");
   const [messageWarning, setMessageWarning] = React.useState(false);
+  const [isTyping, setIsTyping] = React.useState(false);
 
   React.useEffect(() => {
     if (!username) {
@@ -27,8 +28,10 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
 
     const socket = io("http://localhost:5000");
     setSocket(socket);
+    // Join chatroom
     socket.emit("join_chatroom", username);
 
+    // Receive new roomdata
     socket.on(
       "new_roomdata",
       (roomData: { onlineUsers: object[]; typingUsers: string[] }) => {
@@ -41,6 +44,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
       }
     );
 
+    // Receive new message
     socket.on(
       "new_message",
       (newMessage: {
@@ -68,6 +72,20 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
         });
       }
     );
+
+    socket.on("changed_typing", (isTypingUsers: string[]) => {
+      setTypingUsers(isTypingUsers);
+    });
+
+    socket.on("leave_inactivity", () => {
+      socket.disconnect();
+      history.push("/?warning=no-activity");
+    });
+
+    socket.on("disconnect", () => {
+      socket.disconnect();
+      history.push("/?warning=no-activity");
+    });
   }, []);
 
   // FIX: improve enter handling
@@ -92,6 +110,14 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
   const handleChange = (event: any) => {
     setMessageInput(event.target.value);
 
+    if (event.target.value.length === 1 && !isTyping) {
+      setIsTyping(true);
+      socket.emit("changed_typing", true);
+    } else if (event.target.value.length === 0 && isTyping) {
+      setIsTyping(false);
+      socket.emit("changed_typing", false);
+    }
+
     if (
       messageWarning &&
       event.target.value &&
@@ -109,13 +135,8 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
       return;
     }
 
-    // Fix: send messsages
-    // const newMessage = {
-    //   username,
-    //   message: messageInput
-    // };
-
-    // SOCKET.IO call with newMessage;
+    socket.emit("send_message", messageInput);
+    setIsTyping(false);
     setMessageInput("");
   };
 
