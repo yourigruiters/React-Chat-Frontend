@@ -9,6 +9,17 @@ interface chatProps {
 }
 
 const Chat = ({ messages, username }: chatProps) => {
+  const messagesEndRef = React.useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView();
+  };
+
+  React.useEffect(() => {
+    console.log("oleee");
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <section className="chat">
       <section className="chat__messages">
@@ -74,6 +85,7 @@ const Chat = ({ messages, username }: chatProps) => {
             );
           }
         )}
+        <article ref={messagesEndRef} />
       </section>
     </section>
   );

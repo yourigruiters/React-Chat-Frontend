@@ -27,7 +27,8 @@ const HomepageView = ({
     if (username) {
       setUserInput(username);
     } else {
-      // Fix: set userInput to visitorXXX with 3 random digits
+      const random = Math.floor(1000 + Math.random() * 9000);
+      setUserInput(`Visitor${random}`);
     }
 
     const search = new URLSearchParams(location.search);
@@ -40,7 +41,6 @@ const HomepageView = ({
             "Please provide a username before accessing the chatroom."
           );
           break;
-        // Fix: implement below
         case "no-activity":
           setWarning("Disconnected by the server due to inactivity.");
           break;
