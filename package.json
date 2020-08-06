@@ -10,8 +10,13 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "build": "webpack --mode production"
+    "start-dev": "webpack-dev-server --open",
+    "build-dev": "webpack --mode production",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +36,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
+    "serve": "^11.3.2",
     "socket.io-client": "^2.3.0",
     "url-loader": "^4.1.0"
   },
