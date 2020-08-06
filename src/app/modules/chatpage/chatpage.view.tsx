@@ -28,8 +28,8 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
     }
 
     // Create socket for socket.io connection
-    const socket = io("http://localhost:5000");
-    // const socket = io("https://ubiquiti-server.herokuapp.com/");
+    // const socket = io("http://localhost:5000");
+    const socket = io("https://ubiquiti-server.herokuapp.com/");
     setSocket(socket);
 
     // Join chatroom to fetch roomData

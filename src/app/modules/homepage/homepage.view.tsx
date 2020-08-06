@@ -77,8 +77,8 @@ const HomepageView = ({
 
     // Check if username is available - Provide warning if not
     await axios
-      .get(`http://localhost:5000/api/user/${userInput}`)
-      // .get(`https://ubiquiti-server.herokuapp.com/api/user/${userInput}`)
+      // .get(`http://localhost:5000/api/user/${userInput}`)
+      .get(`https://ubiquiti-server.herokuapp.com/api/user/${userInput}`)
       .then((res) => {
         if (res.status === 200) {
           const newUsername = {
