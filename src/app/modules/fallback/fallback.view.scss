@@ -2,8 +2,43 @@
 
 .fallback {
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: calc(100vh - 60px);
   min-height: calc(100vh - 60px);
+
+  &__content {
+    width: 80%;
+    text-align: center;
+    transition: width 0.5s;
+
+    @media (min-width: $breakpoint-md) {
+      width: 60%;
+      max-width: 450px;
+    }
+
+    h2 {
+      font-family: $font-source;
+      margin-bottom: 15px;
+
+      @media (min-width: $breakpoint-lg) {
+        font-size: 3vw;
+      }
+    }
+
+    p {
+      @media (min-width: $breakpoint-lg) {
+        font-size: 1.2vw;
+      }
+    }
+    a {
+      color: $blue-light;
+      transition: color 0.5s;
+
+      &:hover {
+        color: darken($blue-light, 10%);
+      }
+    }
+  }
 }

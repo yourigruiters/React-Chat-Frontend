@@ -43,19 +43,14 @@ Styling
 
 Mobile first responsive design using Sass with flexbox and BEM.
 
-##### Landing page
+##### Homepage
 
 ![Homepage](/readme_screenshots/homepage.png)
 
-###### Menu Room (Pick a Chat)
+###### Chatroom
 
-![Menuroom](/readme_screenshots/menuroom.png)
+![Menuroom](/readme_screenshots/chatroom.png)
 
-###### Chat Room
+###### Chatroom responsive
 
-![Chatroom](/readme_screenshots/chatroom.png)
-(Left and right side is 2 different browsers, simulating 2 users)
-
-###### Video Room
-
-![Videoroom](/readme_screenshots/videoroom.png)
+![Chatroom](/readme_screenshots/chatroom-responsive.png)
