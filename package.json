@@ -2,7 +2,7 @@
   "name": "create-react-personal",
   "version": "1.0.0",
   "description": "",
-  "main": "index.tsx",
+  "main": "dist/index.html",
   "babel": {
     "presets": [
       "@babel/preset-env",
