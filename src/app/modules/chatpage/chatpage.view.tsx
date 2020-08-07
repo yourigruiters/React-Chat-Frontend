@@ -76,11 +76,11 @@ const ChatpageView: React.FC<chatpageProps> = ({
         const today = new Date();
         const hours =
           today.getHours().toString().length === 1
-            ? today.getHours() + "0"
+            ? "0" + today.getHours()
             : today.getHours();
         const minutes =
           today.getMinutes().toString().length === 1
-            ? today.getMinutes() + "0"
+            ? "0" + today.getMinutes()
             : today.getMinutes();
         const time = `${hours}:${minutes}`;
 
