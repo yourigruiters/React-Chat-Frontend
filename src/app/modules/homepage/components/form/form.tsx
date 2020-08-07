@@ -9,7 +9,7 @@ interface formProps {
   handleSubmit: (e: any) => void;
 }
 
-const Form = ({
+const Form: React.FC<formProps> = ({
   userInput,
   warning,
   handleChange,
@@ -21,9 +21,9 @@ const Form = ({
         Welcome, <span>{userInput}</span>!
       </h3>
       <p>
-        We're glad to see you at the entrance of our chat application. Please
-        feel free to change the predefined 'visitor' to a username of your
-        liking before entering the chatroom.
+        We&apos;re glad to see you at the entrance of our chat application.
+        Please feel free to change the predefined &apos;visitor&apos; to a
+        username of your liking before entering the chatroom.
       </p>
       {warning && <article className="form__warning">{warning}</article>}
       <form className="form__form" onSubmit={(e: any) => handleSubmit(e)}>

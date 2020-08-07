@@ -13,7 +13,7 @@ interface chatFooterProps {
   handleSubmit: (e: any) => void;
 }
 
-const ChatFooter = ({
+const ChatFooter: React.FC<chatFooterProps> = ({
   messageInput,
   messageWarning,
   typingUsers,

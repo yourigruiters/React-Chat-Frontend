@@ -3,7 +3,7 @@ import * as React from "react";
 import "./fallback.view.scss";
 import { Link } from "react-router-dom";
 
-const FallbackView = () => {
+const FallbackView: React.FC = () => {
   return (
     <section className="fallback">
       <article className="fallback__content">

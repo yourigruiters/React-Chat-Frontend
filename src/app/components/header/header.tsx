@@ -4,7 +4,7 @@ import Logo from "../../../assets/images/ubiquiti-logo.png";
 
 import "./header.scss";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <header className="header">
       <section className="header__logo">

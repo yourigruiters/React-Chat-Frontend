@@ -4,11 +4,19 @@ import cn from "classnames";
 import "./chat.scss";
 
 interface chatProps {
-  messages: object[];
+  messages: messageType[];
   username: string;
 }
 
-const Chat = ({ messages, username }: chatProps) => {
+type messageType = {
+  username: string;
+  color: string;
+  type: number;
+  message: string;
+  timestamp: string;
+};
+
+const Chat: React.FC<chatProps> = ({ messages, username }: chatProps) => {
   const messagesEndRef = React.useRef(null);
 
   const scrollToBottom = () => {

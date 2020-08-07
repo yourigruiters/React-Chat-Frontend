@@ -5,19 +5,32 @@ import "./chat-main.scss";
 import { ToggleSidebar, OnlineUsers } from "../../../../../assets/icons/icons";
 import Chat from "../chat/chat";
 
-interface chatFooterProps {
-  messages: object[];
-  onlineUsers: object[];
+interface chatMainProps {
+  messages: messageType[];
+  onlineUsers: userType[];
   handleDisconnect: () => void;
   username: string;
 }
 
-const ChatMain = ({
+type messageType = {
+  username: string;
+  color: string;
+  type: number;
+  message: string;
+  timestamp: string;
+};
+
+type userType = {
+  username: string;
+  color: string;
+};
+
+const ChatMain: React.FC<chatMainProps> = ({
   messages,
   onlineUsers,
   handleDisconnect,
   username
-}: chatFooterProps) => {
+}: chatMainProps) => {
   const [openSidebar, setOpenSidebar] = React.useState(true);
 
   return (

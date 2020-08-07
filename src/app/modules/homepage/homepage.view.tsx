@@ -14,7 +14,7 @@ interface homepageProps {
   location: any;
 }
 
-const HomepageView = ({
+const HomepageView: React.FC<homepageProps> = ({
   username,
   setUsername,
   history,

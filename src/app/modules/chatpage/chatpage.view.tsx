@@ -11,10 +11,26 @@ interface chatpageProps {
   history: any;
 }
 
-const ChatpageView = ({ username, history }: chatpageProps) => {
+type messageType = {
+  username: string;
+  color: string;
+  type: number;
+  message: string;
+  timestamp: string;
+};
+
+type userType = {
+  username: string;
+  color: string;
+};
+
+const ChatpageView: React.FC<chatpageProps> = ({
+  username,
+  history
+}: chatpageProps) => {
   const [socket, setSocket] = React.useState<any>({});
-  const [messages, setMessages] = React.useState<object[]>([]);
-  const [onlineUsers, setOnlineUsers] = React.useState<object[]>([]);
+  const [messages, setMessages] = React.useState<messageType[]>([]);
+  const [onlineUsers, setOnlineUsers] = React.useState<userType[]>([]);
   const [typingUsers, setTypingUsers] = React.useState([]);
   const [messageInput, setMessageInput] = React.useState("");
   const [messageWarning, setMessageWarning] = React.useState(false);
@@ -37,11 +53,11 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
 
     socket.on(
       "new_roomdata",
-      (roomData: { onlineUsers: object[]; typingUsers: string[] }) => {
-        setOnlineUsers((prevState: object[]) => {
+      (roomData: { onlineUsers: userType[]; typingUsers: string[] }) => {
+        setOnlineUsers(() => {
           return roomData.onlineUsers;
         });
-        setTypingUsers((prevState: string[]) => {
+        setTypingUsers(() => {
           return roomData.typingUsers;
         });
       }
@@ -70,7 +86,7 @@ const ChatpageView = ({ username, history }: chatpageProps) => {
 
         newMessage.timestamp = time;
 
-        setMessages((prevState: object[]) => {
+        setMessages((prevState: messageType[]) => {
           return [...prevState, newMessage];
         });
       }
