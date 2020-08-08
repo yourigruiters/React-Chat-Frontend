@@ -15,7 +15,8 @@
     "start": "serve -s dist",
     "heroku-postbuild": "npm run build",
     "lint": "eslint src/.",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "cypress": "cypress open"
   },
   "keywords": [],
   "author": "",
@@ -49,7 +50,9 @@
     "@typescript-eslint/parser": "^3.8.0",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.2",
+    "cypress": "^4.12.1",
     "eslint": "^7.6.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.5",
     "html-webpack-plugin": "^4.2.0",

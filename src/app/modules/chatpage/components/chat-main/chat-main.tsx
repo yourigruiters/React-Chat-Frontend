@@ -64,7 +64,7 @@ const ChatMain: React.FC<chatMainProps> = ({
             </button>
           </article>
           <article className="chat-main__people__header__title">
-            <p>
+            <p data-cyid="chatpage-online">
               Online users - <span>{onlineUsers.length}</span>
             </p>
             <OnlineUsers />
@@ -83,7 +83,9 @@ const ChatMain: React.FC<chatMainProps> = ({
           )}
         </section>
         <section className="chat-main__people__footer">
-          <button onClick={handleDisconnect}>Disconnect</button>
+          <button onClick={handleDisconnect} data-cyid="chatpage-disconnect">
+            Disconnect
+          </button>
         </section>
       </section>
     </section>

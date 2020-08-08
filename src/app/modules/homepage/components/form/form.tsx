@@ -17,7 +17,7 @@ const Form: React.FC<formProps> = ({
 }: formProps) => {
   return (
     <section className="form">
-      <h3>
+      <h3 data-cyid="homepage-username">
         Welcome, <span>{userInput}</span>!
       </h3>
       <p>
@@ -25,7 +25,11 @@ const Form: React.FC<formProps> = ({
         Please feel free to change the predefined &apos;visitor&apos; to a
         username of your liking before entering the chatroom.
       </p>
-      {warning && <article className="form__warning">{warning}</article>}
+      {warning && (
+        <article className="form__warning" data-cyid="homepage-warning">
+          {warning}
+        </article>
+      )}
       <form className="form__form" onSubmit={(e: any) => handleSubmit(e)}>
         <label>Username..</label>
         <input
@@ -34,8 +38,13 @@ const Form: React.FC<formProps> = ({
           maxLength={20}
           onChange={(e: any) => handleChange(e)}
           placeholder="Enter your username.."
+          data-cyid="homepage-input"
         />
-        <input type="submit" value="Enter chatroom" />
+        <input
+          type="submit"
+          value="Enter chatroom"
+          data-cyid="homepage-button"
+        />
       </form>
     </section>
   );
