@@ -33,6 +33,13 @@ const ChatMain: React.FC<chatMainProps> = ({
 }: chatMainProps) => {
   const [openSidebar, setOpenSidebar] = React.useState(true);
 
+  // Set to false if small device
+  React.useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setOpenSidebar(false);
+    }
+  }, []);
+
   return (
     <section className="chat-main">
       <section
