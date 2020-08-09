@@ -1,21 +1,19 @@
-describe("homepage tests", () => {
-  it("homepage runs", () => {
+describe("Testing the Homepage", () => {
+  beforeEach(() => {
     cy.visit("/");
+  });
 
+  it("homepage runs", () => {
     cy.url().should("include", "/");
   });
 
   it("Goes directly to chatroom with random name", () => {
-    cy.visit("/");
-
     cy.get("[data-cyid=homepage-button]").click();
 
     cy.url().should("include", "/chatroom");
   });
 
   it("Goes directly to chatroom with own name", () => {
-    cy.visit("/");
-
     cy.get("[data-cyid=homepage-input]")
       .clear()
       .type("myname")
@@ -26,8 +24,6 @@ describe("homepage tests", () => {
   });
 
   it("Shows change value of username", () => {
-    cy.visit("/");
-
     cy.get("[data-cyid=homepage-input]")
       .clear()
       .type("testuser")
@@ -36,8 +32,6 @@ describe("homepage tests", () => {
   });
 
   it("Shows warning when name is empty", () => {
-    cy.visit("/");
-
     cy.get("[data-cyid=homepage-input]")
       .clear()
       .get("[data-cyid=homepage-button]")

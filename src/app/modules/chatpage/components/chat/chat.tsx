@@ -29,7 +29,7 @@ const Chat: React.FC<chatProps> = ({ messages, username }: chatProps) => {
 
   return (
     <section className="chat">
-      <section className="chat__messages">
+      <section className="chat__messages" data-cyid="chatpage-messages">
         {messages.map(
           (
             message: {

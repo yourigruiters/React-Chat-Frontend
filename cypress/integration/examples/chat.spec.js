@@ -1,4 +1,8 @@
-describe("chatpage tests", () => {
+describe("Testing the Chatpage", () => {
+  beforeEach(() => {
+    cy.visit("/").get("[data-cyid=homepage-button]").click();
+  });
+
   it("chatpage should link away if no user", () => {
     cy.visit("/chatroom");
 
@@ -6,24 +10,17 @@ describe("chatpage tests", () => {
   });
 
   it("Chatpage should be reached through homepage", () => {
-    cy.visit("/").get("[data-cyid=homepage-button]").click();
-
     cy.url().should("include", "chatroom");
   });
 
   it("Chatpage should disconnect on button", () => {
-    cy.visit("/").get("[data-cyid=homepage-button]").click();
-
     cy.get("[data-cyid=chatpage-disconnect]").click();
 
     cy.url().should("eq", "http://localhost:8080/");
   });
 
   it("Shows a single online user", () => {
-    cy.visit("/");
-
-    cy.get("[data-cyid=homepage-button]").click();
-
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(2500);
 
     cy.get("[data-cyid=chatpage-online]").should(
@@ -32,23 +29,36 @@ describe("chatpage tests", () => {
     );
   });
 
-  it("Shows warning when name is empty", () => {
-    cy.visit("/");
-
-    cy.get("[data-cyid=homepage-input]")
+  it("No new message if field is empty", () => {
+    cy.get("[data-cyid=chatpage-input]")
       .clear()
-      .get("[data-cyid=homepage-button]")
+      .get("[data-cyid=chatpage-button]")
       .click();
 
-    cy.get("[data-cyid=homepage-warning]").should("be.visible");
+    cy.get("[data-cyid=chatpage-messages] > .chat__block")
+      .its("length")
+      .then((size) => {
+        cy.get("[data-cyid=chatpage-messages] > .chat__block").should(
+          "have.length",
+          size
+        );
+      });
   });
 
-  // Check API username
-  it("Check API username", () => {
-    cy.request("http://localhost:5000/api/user/testuser").as("APIusertest");
+  it("Send message if field is not empty", () => {
+    cy.get("[data-cyid=chatpage-input]")
+      .clear()
+      .type("test message")
+      .get("[data-cyid=chatpage-button]")
+      .click();
 
-    cy.get("@APIusertest").should((response) => {
-      expect(response.status).to.eq(200);
-    });
+    cy.get("[data-cyid=chatpage-messages] > .chat__block")
+      .its("length")
+      .then((size) => {
+        cy.get("[data-cyid=chatpage-messages] > .chat__block").should(
+          "have.length",
+          size + 1
+        );
+      });
   });
 });

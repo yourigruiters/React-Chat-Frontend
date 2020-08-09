@@ -36,8 +36,9 @@ const ChatFooter: React.FC<chatFooterProps> = ({
               placeholder="Write a message.."
               onChange={(e: any) => handleChange(e)}
               value={messageInput}
+              data-cyid="chatpage-input"
             ></textarea>
-            <button type="submit">
+            <button type="submit" data-cyid="chatpage-button">
               <SendMessage />
               <span>Send</span>
             </button>
