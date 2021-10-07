@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Form from "./components/form/form";
 
-import Logo from "../../../assets/images/ubiquiti-logo-white.png";
+import Logo from "../../../assets/images/logo-white.png";
 
 import "./homepage.view.scss";
 
@@ -18,7 +18,7 @@ const HomepageView: React.FC<homepageProps> = ({
   username,
   setUsername,
   history,
-  location
+  location,
 }: homepageProps) => {
   const [userInput, setUserInput] = React.useState("Visitor");
   const [warning, setWarning] = React.useState("");
@@ -82,7 +82,7 @@ const HomepageView: React.FC<homepageProps> = ({
       .then((res) => {
         if (res.status === 200) {
           const newUsername = {
-            username: userInput
+            username: userInput,
           };
 
           setUsername(newUsername);

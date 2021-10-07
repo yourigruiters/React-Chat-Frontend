@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Logo from "../../../assets/images/ubiquiti-logo.png";
+import Logo from "../../../assets/images/logo.png";
 
 import "./header.scss";
 
