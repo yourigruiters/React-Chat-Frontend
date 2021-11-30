@@ -26,7 +26,7 @@ type userType = {
 
 const ChatpageView: React.FC<chatpageProps> = ({
   username,
-  history
+  history,
 }: chatpageProps) => {
   const [socket, setSocket] = React.useState<any>({});
   const [messages, setMessages] = React.useState<messageType[]>([]);
@@ -45,7 +45,7 @@ const ChatpageView: React.FC<chatpageProps> = ({
 
     // Create socket for socket.io connection
     // const socket = io("http://localhost:5000");
-    const socket = io("https://ubiquiti-server.herokuapp.com/");
+    const socket = io("https://chat-backend-yg.herokuapp.com/");
     setSocket(socket);
 
     // Join chatroom to fetch roomData

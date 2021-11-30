@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 
 import "./form.scss";
 
@@ -13,8 +14,16 @@ const Form: React.FC<formProps> = ({
   userInput,
   warning,
   handleChange,
-  handleSubmit
+  handleSubmit,
 }: formProps) => {
+  const [value, setValue] = useState("Enter chatroom");
+
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    setValue("Entering...");
+    handleSubmit(e);
+  };
+
   return (
     <section className="form">
       <h3 data-cyid="homepage-username">
@@ -30,7 +39,7 @@ const Form: React.FC<formProps> = ({
           {warning}
         </article>
       )}
-      <form className="form__form" onSubmit={(e: any) => handleSubmit(e)}>
+      <form className="form__form" onSubmit={(e: any) => handleClick(e)}>
         <label>Username..</label>
         <input
           type="text"
@@ -40,11 +49,7 @@ const Form: React.FC<formProps> = ({
           placeholder="Enter your username.."
           data-cyid="homepage-input"
         />
-        <input
-          type="submit"
-          value="Enter chatroom"
-          data-cyid="homepage-button"
-        />
+        <input type="submit" value={value} data-cyid="homepage-button" />
       </form>
     </section>
   );
